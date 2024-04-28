@@ -21,6 +21,8 @@ class UserResource extends JsonResource
             'profileImage' => $this->profileImage,
             'role' => $this->role,
             'courses' => CourseResource::collection($this->whenLoaded('courses')),
+            'enrolledCourses' => CourseResource::collection($this->whenLoaded('enrolledCourses')),
+            'certificates' => CertificateResource::collection($this->whenLoaded('certificates')),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

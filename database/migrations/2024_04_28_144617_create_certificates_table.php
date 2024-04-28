@@ -13,17 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('course_user', function (Blueprint $table) {
+        Schema::create('certificates', function (Blueprint $table) {
             $table->id()->nullable(false);
-            $table->foreignId('course_id')->constrained(
+            $table->foreignId('courseId')->constrained(
                 table: 'courses',
-                column: 'id'
+                column: 'id',
             );
-            $table->foreignId('user_id')->constrained(
-                table: 'users',
-                column: 'id'
-            );
-            $table->enum('status', ['completed', 'uncomplete'])->default('uncomplete')->nullable(false);
+            $table->text('title')->nullable(false);
+            $table->longText('description')->nullable(false);
+            $table->text('image')->nullable(false);
             $table->timestamps();
         });
     }
@@ -35,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('courses_users');
+        Schema::dropIfExists('certificates');
     }
 };

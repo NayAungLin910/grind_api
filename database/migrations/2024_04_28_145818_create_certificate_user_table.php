@@ -13,17 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('course_user', function (Blueprint $table) {
-            $table->id()->nullable(false);
-            $table->foreignId('course_id')->constrained(
-                table: 'courses',
+        Schema::create('certificate_user', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('certificate_id')->constrained(
+                table: 'certificates',
                 column: 'id'
             );
             $table->foreignId('user_id')->constrained(
                 table: 'users',
                 column: 'id'
             );
-            $table->enum('status', ['completed', 'uncomplete'])->default('uncomplete')->nullable(false);
             $table->timestamps();
         });
     }
@@ -35,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('courses_users');
+        Schema::dropIfExists('certificate_user');
     }
 };

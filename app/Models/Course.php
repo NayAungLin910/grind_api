@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Course extends Model
 {
@@ -32,5 +33,12 @@ class Course extends Model
     public function enrolledStudents(): BelongsToMany
     {
         return $this->belongsToMany(User::class)->withPivot('status')->withTimestamps();
+    }
+
+    /**
+     * Get the certificate the course is associated with
+     */
+    public function certificate(): HasOne {
+        return $this->hasOne(Certificate::class, 'courseId');
     }
 }

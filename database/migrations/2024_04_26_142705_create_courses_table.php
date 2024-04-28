@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('courses', function (Blueprint $table) {
-            $table->id();
+            $table->id()->nullable(false);
             $table->string('title')->nullable(false);
             $table->longText('description')->nullable(false);
             $table->text('image')->nullable(false);

@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -46,15 +47,27 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    // Get the courses the admin created
+    /**
+     * Get the courses the admin created
+     */
     public function courses(): HasMany
     {
         return $this->hasMany(Course::class, 'userId');
     }
 
-    // Get the courses the users enrolled
+    /**
+     * Get the courses the users enrolled
+     */
     public function enrolledCourses(): BelongsToMany
     {
         return $this->belongsToMany(Course::class)->withPivot('status')->withTimestamps();
+    }
+
+    /**
+     * Get the certificates gained
+     */
+    public function certificates(): BelongsToMany
+    {
+        return $this->belongsToMany(Certificate::class)->withTimestamps();
     }
 }
