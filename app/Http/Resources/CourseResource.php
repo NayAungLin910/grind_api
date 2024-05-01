@@ -23,6 +23,7 @@ class CourseResource extends JsonResource
             'user' => UserResource::collection($this->whenLoaded('user')),
             'certificate' => CertificateResource::collection($this->whenLoaded('certificate')),
             'enrolledStudents' => UserResource::collection($this->whenLoaded('enrolledStudents')),
+            'sections' => SectionResource::collection($this->whenLoaded('sections')),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

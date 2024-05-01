@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Course extends Model
@@ -40,5 +41,12 @@ class Course extends Model
      */
     public function certificate(): HasOne {
         return $this->hasOne(Certificate::class, 'courseId');
+    }
+
+    /**
+     * Get the sections of the course
+     */
+    public function sections(): HasMany {
+        return $this->hasMany(Section::class, 'courseId');
     }
 }

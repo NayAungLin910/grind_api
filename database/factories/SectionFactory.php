@@ -2,12 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Models\Course;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Certificate>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Section>
  */
-class CertificateFactory extends Factory
+class SectionFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,10 +18,9 @@ class CertificateFactory extends Factory
     public function definition()
     {
         return [
-            'courseId' => CourseFactory::class,
+            'courseId' => Course::factory(),
             'title' => fake()->title(),
-            'description' => fake()->paragraph(),
-            'image' =>  '/default/images/default_certificate_image.png',
+            'description' => fake()->paragraph()
         ];
     }
 }

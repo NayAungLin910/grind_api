@@ -1,5 +1,6 @@
 <?php
 
+use App\ConstantValues\StatusConstantValues;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -23,7 +24,7 @@ return new class extends Migration
                 table: 'users',
                 column: 'id'
             );
-            $table->enum('status', ['completed', 'uncomplete'])->default('uncomplete')->nullable(false);
+            $table->enum('status', StatusConstantValues::STATUS_ENUM_ARRAY)->default(StatusConstantValues::STATUS_UNCOMPLETE)->nullable(false);
             $table->timestamps();
         });
     }

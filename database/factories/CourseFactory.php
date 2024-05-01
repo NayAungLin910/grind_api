@@ -20,7 +20,7 @@ class CourseFactory extends Factory
         return [
             'title' => fake()->title(),
             'description' => fake()->paragraph(),
-            'image' => '/images/default_course_image.png',
+            'image' => '/default/images/default_course_image.png',
             'userId' => User::factory(),
         ];
     }

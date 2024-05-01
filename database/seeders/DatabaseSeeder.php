@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\Certificate;
 use App\Models\Course;
+use App\Models\Section;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -26,19 +27,26 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@gmail.com',
         ]);
 
+        // Create sections of the courses
+        foreach ($admin->courses as $course) {
+            Section::factory()->count(3)->create([
+                'courseId' => $course->id,
+            ]);
+        }
+
         // Create two normal users accounts
         $users = User::factory()->count(2)->create();
 
         $coursesByAdmin = $admin->courses;
 
-        foreach($users as $user) {
+        foreach ($users as $user) {
             // enroll the users into the courses created by admin
             $user->enrolledCourses()->toggle($coursesByAdmin->pluck('id'));
         }
 
         $certificateCollections = collect();
 
-        foreach($coursesByAdmin->pluck('id') as $courseId) {
+        foreach ($coursesByAdmin->pluck('id') as $courseId) {
             // create certificate for each course
             $certificate = Certificate::factory()->create([
                 'courseId' => $courseId,
@@ -49,13 +57,13 @@ class DatabaseSeeder extends Seeder
         // Get the courses lazy loaded with certificate
         $coursesByAdmin = Course::whereIn('id', $admin->courses->pluck('id'))->with('certificate')->get();
 
-        foreach($admin->courses as $course) {
+        foreach ($admin->courses as $course) {
             $course = $course->with('certificate')->get();
 
             $coursesByAdmin->push($course);
         }
 
-        foreach($users as $user) {
+        foreach ($users as $user) {
             // completing a course the user is enrolling
             $user->enrolledCourses()->updateExistingPivot($coursesByAdmin[0]->id, [
                 'status' => 'completed',
