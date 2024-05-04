@@ -14,7 +14,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('course_user', function (Blueprint $table) {
+        Schema::create('enrolled_courses', function (Blueprint $table) {
             $table->id()->nullable(false);
             $table->foreignId('course_id')->constrained(
                 table: 'courses',

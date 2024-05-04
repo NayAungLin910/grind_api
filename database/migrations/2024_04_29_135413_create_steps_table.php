@@ -1,6 +1,5 @@
 <?php
 
-use App\ConstantValues\StatusConstantValues;
 use App\ConstantValues\StepConstantValues;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -23,11 +22,10 @@ return new class extends Migration
             );
             $table->enum('type', StepConstantValues::STEP_ENUM_ARRAY)->default(StepConstantValues::READING_TYPE)->nullable(false);
             $table->text('title')->nullable(false);
-            $table->text('video');
+            $table->text('video')->nullable();
             $table->longText('description')->nullable(false);
-            $table->longText('readingContext');
-            $table->enum('status', StatusConstantValues::STATUS_ENUM_ARRAY)->default(StatusConstantValues::STATUS_ENUM_DEFAULT_VALUE);
-            $table->timestamp('timeGiven');
+            $table->longText('readingContent')->nullable();
+            $table->timestamp('timeGiven')->nullable();
             $table->timestamps();
         });
     }

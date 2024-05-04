@@ -60,7 +60,7 @@ class User extends Authenticatable
      */
     public function enrolledCourses(): BelongsToMany
     {
-        return $this->belongsToMany(Course::class)->withPivot('status')->withTimestamps();
+        return $this->belongsToMany(Course::class, 'enrolled_courses')->withPivot('status')->withTimestamps();
     }
 
     /**
@@ -69,5 +69,13 @@ class User extends Authenticatable
     public function certificates(): BelongsToMany
     {
         return $this->belongsToMany(Certificate::class)->withTimestamps();
+    }
+
+    /**
+     * Get the setps completed by user
+     */
+    public function steps(): BelongsToMany
+    {
+        return $this->belongsToMany(Step::class, 'completed_steps');
     }
 }

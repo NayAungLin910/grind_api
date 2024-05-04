@@ -17,14 +17,14 @@ class StepResource extends JsonResource
         return [
             'id' => $this->id,
             'sectionId' => $this->sectionId,
-            'section' => SectionResource::collection($this->whenLoaded('section')),
             'type' => $this->type,
             'title' => $this->title,
             'video' => $this->video,
             'description' => $this->description,
             'readingContent' => $this->readingContent,
-            'status' => $this->status,
             'timeGiven' => $this->timeGiven,
+            'section' => SectionResource::collection($this->whenLoaded('section')),
+            'questions' => QuestionResource::collection($this->whenLoaded('questions')),
         ];
     }
 }

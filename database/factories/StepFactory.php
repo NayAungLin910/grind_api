@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\ConstantValues\StatusConstantValues;
 use App\ConstantValues\StepConstantValues;
 use App\Models\Section;
 use Carbon\Carbon;
@@ -27,7 +26,6 @@ class StepFactory extends Factory
             'video' => null,
             'description' => fake()->paragraph(),
             'readingContent' => fake()->paragraph(),
-            'status' =>  StatusConstantValues::STATUS_UNCOMPLETE,
             'timeGiven' => null,
         ];
     }

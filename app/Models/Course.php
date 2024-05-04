@@ -33,7 +33,7 @@ class Course extends Model
      */
     public function enrolledStudents(): BelongsToMany
     {
-        return $this->belongsToMany(User::class)->withPivot('status')->withTimestamps();
+        return $this->belongsToMany(User::class, 'enrolled_courses')->withPivot('status')->withTimestamps();
     }
 
     /**
